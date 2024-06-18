@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
-  const [password, setPassword] = useState('');
-  const [timer, setTimer] = useState(0);
+  const [password, setPassword] = useState(localStorage.getItem('password') || '');
+  const [timer, setTimer] = useState(localStorage.getItem('timer') || 0);
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem('password', password);
+    localStorage.setItem('timer', timer);
+  }, [password, timer]);
 
   const startTimer = () => {
     setShowPassword(false);
